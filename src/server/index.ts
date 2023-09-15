@@ -7,6 +7,7 @@ import router from "./routes";
 import { errorHandler } from "./middlewares";
 import bodyParser from "body-parser";
 import publicRouter from "./routes/public";
+import studentViewRouter from "./routes/studentsViewRouter";
 
 import { admin, adminRouter } from "../adminJs";
 
@@ -32,6 +33,7 @@ server.use(admin.options.rootPath, adminRouter);
 
 // Routing configuration
 server.use(publicRouter);
+server.use(studentViewRouter);
 server.use(apiPrefix, router);
 
 // Errors Handler middleware configuration
@@ -43,7 +45,7 @@ server.listen(port, () => {
         console.clear();
         const date = new Date();
         log(`Node server started in ${date.toLocaleString()} at ${chalk.blue(`http://localhost:${port}${apiPrefix}`)}`);
-        log(`Access ${chalk.bold.blue("Api Documentation")} at ${chalk.blue(`http://localhost:${port}${apiPrefix}`)}`);
+        log(`Access ${chalk.bold.blue("Api Documentation")} at ${chalk.blue(`http://localhost:${port}${apiPrefix}/docs`)}`);
         log(`Access ${chalk.bold.blue("Administration Panel")} at ${chalk.blue(`http://localhost:${port}${admin.options.rootPath}`)}`);
         log(`Access ${chalk.bold.blue("Login Page")} at ${chalk.blue(`http://localhost:${port}/login`)}`);
         log(`\nDeveloped by ${chalk.bold.green("Thiago Elias")}`);

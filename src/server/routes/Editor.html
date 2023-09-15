@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor Quill.js com Bootstrap</title>
+
+    <!-- Inclua os arquivos CSS do Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Inclua a biblioteca Quill.js via CDN -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+    <!-- Estilos personalizados -->
+    <style>
+        /* Estilo para o contêiner do editor Quill */
+        #editor-container {
+            height: 300px;
+            /* Altura desejada para o editor */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center" id='title'>Editor Quill.js com Bootstrap</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- Contêiner Bootstrap -->
+                <div class="card">
+                    <div class="card-body">
+                        <!-- O editor Quill.js será renderizado aqui -->
+                        <div id="editor-container"></div>
+                    </div>
+                </div>
+
+                <!-- Botão para mostrar o conteúdo no console -->
+                <button id="mostrar-conteudo" class="btn btn-primary mt-3">Mostrar Conteúdo</button>
+                <button class="btn btn-danger" id="logout-button">Voltar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var queryString = window.location.href;
+
+        const id = queryString.split("/")[5]
+
+        const title = document.getElementById("title")
+        title.innerText = id
+
+        // Inicialize o editor Quill.js
+        var quill = new Quill('#editor-container', {
+            theme: 'snow' // Pode escolher outro tema se preferir
+        });
+
+        // Adicione um evento de clique ao botão
+        document.getElementById('mostrar-conteudo').addEventListener('click', function () {
+            // Obtenha o conteúdo do editor
+            var conteudo = quill.root.innerHTML;
+            // Mostre o conteúdo no console
+            console.log(conteudo);
+        });
+
+        // Função para fazer logout
+        // function logout() {
+        //     // Remove o JWT do localStorage
+        //     localStorage.removeItem("jwt");
+
+        //     // Redireciona para a página de login
+        //     window.location.href = "http://localhost:3333/login";
+        // }
+
+        // Vincule o evento de clique ao botão de logout
+        document.getElementById("logout-button").addEventListener('click', function () {
+            window.location.href = `http://localhost:3333/students`
+        });
+        
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
