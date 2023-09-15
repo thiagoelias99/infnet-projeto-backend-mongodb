@@ -20,7 +20,7 @@
             height: 300px;
             /* Altura desejada para o editor */
         }
-    </style>
+    </style>    
 </head>
 
 <body>
@@ -43,13 +43,13 @@
         </div>
     </div>
 
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>)
     <script>
         var queryString = window.location.href;
 
         const courseId = queryString.split("/")[5]
 
-        const title = document.getElementById("title")
-        
+        const title = document.getElementById("title")        
 
         const jwtToken = localStorage.getItem("jwt");
 
@@ -85,6 +85,10 @@
         });
 
         getDocsInfo()
+
+        //Configuração do socket.io
+        const socket = io("http://localhost:3333");
+
 
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

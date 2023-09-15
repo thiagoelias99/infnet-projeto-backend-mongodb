@@ -83,7 +83,7 @@
                                     <h5 class="card-title">${course.description}</h5>
                                     <p class="card-text"><strong>Data de Início:</strong> ${course.startDate}</p>
                                     <p class="card-text"><strong>Data de Término:</strong> ${course.finishDate}</p>
-                                    <button class="btn btn-primary" onclick="fetchCourseNotes('${course.uuid}')">Ver Notas</button>
+                                    <button class="btn btn-primary" onclick="openEditor('${course.uuid}')">Ver Notas</button>
                                 </div>
                             </div>
                         `;
@@ -97,12 +97,7 @@
             });
         }
 
-        // Função para fazer o GET das notas de um curso
-        function fetchCourseNotes(courseUuid) {
-            // Execute o GET para localhost:3333/api/v1/courses/notes/{uuid do curso}
-            // Você pode implementar essa função conforme necessário.
-            // Certifique-se de incluir a lógica para exibir as notas no card do curso correspondente.
-            alert(`Recuperando notas para o curso com UUID: ${courseUuid}`);
+        function openEditor(courseUuid) {
             window.location.href = `http://localhost:3333/courses/notes/${courseUuid}`;
 
         }

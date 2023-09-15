@@ -39,6 +39,7 @@
     "react-chartjs-2": "^5.2.0",
     "sequelize": "^6.32.0",
     "sequelize-cli": "^6.6.1",
+    "socket.io": "^4.7.2",
     "sqlite3": "^5.1.6",
     "swagger-ui-express": "^4.6.3",
     "tslib": "^2.6.1",

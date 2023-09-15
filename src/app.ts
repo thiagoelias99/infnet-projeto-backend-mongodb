@@ -1,5 +1,5 @@
 import { syncWithDatabase } from "./databases/sequelize";
-import server from "./server";
+import server from "./server/sockets";
 
 function startApp() {
     server;
