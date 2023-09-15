@@ -34,43 +34,43 @@ export async function runSeed(Student: any, Course: any): Promise<void> {
             uuid: faker.string.uuid(),
             description: "Backend Nível 1",
             courseHours: 10,
-            startDate: new Date("06/01/2023"),
-            finishDate: new Date("07/01/2023")
+            startDate: new Date("06/01/2024"),
+            finishDate: new Date("07/01/2024")
         },
         {
             uuid: faker.string.uuid(),
             description: "Backend Nível 2",
             courseHours: 12,
-            startDate: new Date("07/01/2023"),
-            finishDate: new Date("08/01/2023")
+            startDate: new Date("07/01/2024"),
+            finishDate: new Date("08/01/2024")
         },
         {
             uuid: faker.string.uuid(),
             description: "Backend Nível 3",
             courseHours: 14,
-            startDate: new Date("09/01/2023"),
-            finishDate: new Date("10/01/2023")
+            startDate: new Date("09/01/2024"),
+            finishDate: new Date("10/01/2024")
         },
         {
             uuid: faker.string.uuid(),
             description: "Frontend Nível 1",
             courseHours: 12,
-            startDate: new Date("07/01/2023"),
-            finishDate: new Date("08/01/2023")
+            startDate: new Date("07/01/2024"),
+            finishDate: new Date("08/01/2024")
         },
         {
             uuid: faker.string.uuid(),
             description: "Frontend Nível 2",
             courseHours: 8,
-            startDate: new Date("09/01/2023"),
-            finishDate: new Date("10/01/2023")
+            startDate: new Date("09/01/2024"),
+            finishDate: new Date("10/01/2024")
         },
         {
             uuid: faker.string.uuid(),
             description: "Frontend Nível 3",
             courseHours: 16,
-            startDate: new Date("10/01/2023"),
-            finishDate: new Date("11/01/2023")
+            startDate: new Date("10/01/2024"),
+            finishDate: new Date("11/01/2024")
         },
     ];
 
