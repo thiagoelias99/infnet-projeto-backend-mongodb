@@ -5,6 +5,8 @@ import chalk from "chalk";
 import * as dotenv from "dotenv";
 import router from "./routes";
 import { errorHandler } from "./middlewares";
+import bodyParser from "body-parser";
+import publicRouter from "./routes/public";
 
 import { admin, adminRouter } from "../adminJs";
 
@@ -19,7 +21,8 @@ const apiPrefix = `/api/${apiVersion}`;
 server.use(cors());
 
 // Body Parser middleware configuration
-server.use(express.json());
+server.use(bodyParser.urlencoded({ extended: false }));
+server.use(bodyParser.json());
 
 // Log middleware configuration
 server.use(morgan("dev"));
@@ -28,6 +31,7 @@ server.use(morgan("dev"));
 server.use(admin.options.rootPath, adminRouter);
 
 // Routing configuration
+server.use(publicRouter);
 server.use(apiPrefix, router);
 
 // Errors Handler middleware configuration
@@ -41,6 +45,7 @@ server.listen(port, () => {
         log(`Node server started in ${date.toLocaleString()} at ${chalk.blue(`http://localhost:${port}${apiPrefix}`)}`);
         log(`Access ${chalk.bold.blue("Api Documentation")} at ${chalk.blue(`http://localhost:${port}${apiPrefix}`)}`);
         log(`Access ${chalk.bold.blue("Administration Panel")} at ${chalk.blue(`http://localhost:${port}${admin.options.rootPath}`)}`);
+        log(`Access ${chalk.bold.blue("Login Page")} at ${chalk.blue(`http://localhost:${port}/login`)}`);
         log(`\nDeveloped by ${chalk.bold.green("Thiago Elias")}`);
         log("Repo https://github.com/thiagoelias99/infnet-projeto-backend-typescript\n\n\n");
     }, 2000);
