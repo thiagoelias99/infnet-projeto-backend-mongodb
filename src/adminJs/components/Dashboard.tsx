@@ -31,7 +31,7 @@ export default function Dashboard() {
     });
 
     const api = axios.create({
-        baseURL: "http://localhost:3333/courses/dashboard"
+        baseURL: "http://localhost:3333/api/v1/courses/dashboard"
     });
 
     interface CourseDashboar {

@@ -1,4 +1,4 @@
-import AdminJS, { AdminJSOptions, LocaleTranslations } from "adminjs";
+import AdminJS, { AdminJSOptions } from "adminjs";
 import AdminJSExpress from "@adminjs/express";
 import * as AdminJSSequelize from "@adminjs/sequelize";
 

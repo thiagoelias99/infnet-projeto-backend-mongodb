@@ -12,6 +12,9 @@ dotenv.config();
 const server = express();
 const port = process.env.PORT || 3333;
 
+const apiVersion = "v1";
+const apiPrefix = `/api/${apiVersion}`;
+
 // CORS middleware configuration
 server.use(cors());
 
@@ -25,7 +28,7 @@ server.use(morgan("dev"));
 server.use(admin.options.rootPath, adminRouter);
 
 // Routing configuration
-server.use(router);
+server.use(apiPrefix, router);
 
 // Errors Handler middleware configuration
 server.use(errorHandler);
@@ -35,8 +38,8 @@ server.listen(port, () => {
     setTimeout(() => {
         console.clear();
         const date = new Date();
-        log(`Node server started in ${date.toLocaleString()} at ${chalk.blue(`http://localhost:${port}`)}`);
-        log(`Access ${chalk.bold.blue("Api Documentation")} at ${chalk.blue(`http://localhost:${port}`)}`);
+        log(`Node server started in ${date.toLocaleString()} at ${chalk.blue(`http://localhost:${port}${apiPrefix}`)}`);
+        log(`Access ${chalk.bold.blue("Api Documentation")} at ${chalk.blue(`http://localhost:${port}${apiPrefix}`)}`);
         log(`Access ${chalk.bold.blue("Administration Panel")} at ${chalk.blue(`http://localhost:${port}${admin.options.rootPath}`)}`);
         log(`\nDeveloped by ${chalk.bold.green("Thiago Elias")}`);
         log("Repo https://github.com/thiagoelias99/infnet-projeto-backend-typescript\n\n\n");
