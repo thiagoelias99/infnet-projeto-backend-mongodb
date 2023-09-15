@@ -46,10 +46,25 @@
     <script>
         var queryString = window.location.href;
 
-        const id = queryString.split("/")[5]
+        const courseId = queryString.split("/")[5]
 
         const title = document.getElementById("title")
-        title.innerText = id
+        
+
+        const jwtToken = localStorage.getItem("jwt");
+
+        const requestOptions = {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${jwtToken}`
+            }
+        };
+
+        function getDocsInfo() {
+            fetch(`http://localhost:3333/api/v1/courses/info/${courseId}`, requestOptions)
+                .then(result => result.json())
+                .then(result => title.innerText = result.description)
+        }
 
         // Inicialize o editor Quill.js
         var quill = new Quill('#editor-container', {
@@ -64,20 +79,13 @@
             console.log(conteudo);
         });
 
-        // Função para fazer logout
-        // function logout() {
-        //     // Remove o JWT do localStorage
-        //     localStorage.removeItem("jwt");
-
-        //     // Redireciona para a página de login
-        //     window.location.href = "http://localhost:3333/login";
-        // }
-
         // Vincule o evento de clique ao botão de logout
         document.getElementById("logout-button").addEventListener('click', function () {
             window.location.href = `http://localhost:3333/students`
         });
-        
+
+        getDocsInfo()
+
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>

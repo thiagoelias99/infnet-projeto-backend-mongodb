@@ -16,6 +16,9 @@ router.route(`${path}/dashboard`)
 router.route(`${path}/info`)
     .get(Authentication, CourseController.getInfo);
 
+router.route(`${path}/info/:uuid`)
+    .get(Authentication, CourseController.getByUuid);
+
 router.route(`${path}/:uuid`)
     .all(RequestValidator.params)
     .get(AdminAuthentication, CourseController.getByUuid)
