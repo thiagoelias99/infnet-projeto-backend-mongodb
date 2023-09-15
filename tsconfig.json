@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+      "jsx": "react",
+      "target": "ES6",
+      "rootDir": "./src",
+      "outDir": "./build",
+      "noEmitOnError": true,
+      "noImplicitAny": true,
+      "removeComments": true,
+      "skipLibCheck": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "esModuleInterop": true,
+      "module": "commonjs",
+      "allowJs": true,
+      "checkJs": true,
+      "resolveJsonModule": true
+  },
+  "include": [
+    "./src"
+  ],
+  "exclude": [
+    "./jest.config.ts",
+    "./node_modules",
+    "./tests",
+    "./build",
+    "./utils"
+  ]
+}
