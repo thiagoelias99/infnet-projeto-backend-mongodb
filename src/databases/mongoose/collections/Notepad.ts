@@ -7,10 +7,10 @@ interface IMongoAccount extends Omit<INotepad, "id"> {
     _id: string
 }
 
-const notepadSchema = new Schema<IMongoAccount>(
+export const notepadSchema = new Schema<IMongoAccount>(
     {
         _id: { type: String },
-        content: { type: String, required: true },
+        content: { type: String, required: false },
     },
     {
         versionKey: false

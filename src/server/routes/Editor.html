@@ -43,7 +43,8 @@
         </div>
     </div>
 
-    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>)
+    <!-- <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script> -->
+    <script src="/socket.io/socket.io.js"></script>
     <script>
         var queryString = window.location.href;
 
@@ -71,12 +72,18 @@
             theme: 'snow' // Pode escolher outro tema se preferir
         });
 
+        quill.on('text-change', function (delta, oldDelta, source) {
+            console.log(source)
+            if (source == 'user') {
+                const content = quill.root.innerHTML;
+                sendContent(content);
+            }
+        });
+
         // Adicione um evento de clique ao botão
         document.getElementById('mostrar-conteudo').addEventListener('click', function () {
             // Obtenha o conteúdo do editor
             var conteudo = quill.root.innerHTML;
-            // Mostre o conteúdo no console
-            console.log(conteudo);
         });
 
         // Vincule o evento de clique ao botão de logout
@@ -88,7 +95,19 @@
 
         //Configuração do socket.io
         const socket = io("http://localhost:3333");
+        socket.emit("joinRoom", courseId);
 
+        socket.on("currentContent", (content) => {
+            // quill.root.innerHTML = content;
+            quill.clipboard.dangerouslyPasteHTML(content);
+        });
+
+        function sendContent(content) {
+            socket.emit("updateContent", {
+                id: courseId,
+                content
+            });
+        }
 
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
