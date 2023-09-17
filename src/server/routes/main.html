@@ -32,15 +32,19 @@
 
 <body>
     <div class="container mt-5">
+        <button class="btn btn-danger" id="logout-button">Logout</button>
         <h1 class="text-center">Informações do Estudante</h1>
         <div id="student-info">
             <!-- Os dados do estudante serão exibidos aqui -->
         </div>
-        <h2 class="mt-4">Cursos</h2>
+        <h2 class="mt-4">Meus Cursos</h2>
         <div id="course-list">
             <!-- Os cards dos cursos serão exibidos aqui -->
         </div>
-        <button class="btn btn-danger" id="logout-button">Logout</button>
+        <h2 class="mt-4">Cursos Disponíveis</h2>
+        <div id="available-course-list">
+            <!-- Os cards dos cursos serão exibidos aqui -->
+        </div>        
     </div>
 
     <!-- Adicione o link para o jQuery (necessário para o Bootstrap JavaScript) e o JavaScript do Bootstrap (opcional) -->
@@ -83,11 +87,52 @@
                                     <h5 class="card-title">${course.description}</h5>
                                     <p class="card-text"><strong>Data de Início:</strong> ${course.startDate}</p>
                                     <p class="card-text"><strong>Data de Término:</strong> ${course.finishDate}</p>
-                                    <button class="btn btn-primary" onclick="openEditor('${course.uuid}')">Ver Notas</button>
+                                    <button class="btn btn-primary" onclick="openEditor('${course.uuid}')">Ver Anotações</button>
+                                    <button class="btn btn-danger" onclick="unsubscribe('${course.uuid}')">Cancelar Inscrição</button>
                                 </div>
                             </div>
                         `;
                         courseList.append(courseCard);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    alert("Erro ao obter informações do estudante.");
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+
+        function fetchCoursesInfo() {
+            const jwtToken = localStorage.getItem("jwt");
+
+            if (!jwtToken) {
+                alert("JWT não encontrado no localStorage.");
+                return;
+            }
+
+            $.ajax({
+                url: "http://localhost:3333/api/v1/courses/info",
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${jwtToken}`
+                },
+                success: function (data) {
+                    console.log(data)
+
+                    // Preencha os cards dos cursos
+                    const availableCourseList = $("#available-course-list");
+                    data.forEach(course => {
+                        const courseCard = `
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">${course.description}</h5>
+                                    <p class="card-text"><strong>Data de Início:</strong> ${course.startDate}</p>
+                                    <p class="card-text"><strong>Data de Término:</strong> ${course.finishDate}</p>
+                                    <button class="btn btn-primary" onclick="subscribeToCourse('${course.uuid}')">Inscrever</button>
+                                </div>
+                            </div>
+                        `;
+                        availableCourseList.append(courseCard);
                     });
                 },
                 error: function (xhr, status, error) {
@@ -102,9 +147,60 @@
 
         }
 
+        function subscribeToCourse(courseUuid) {
+            const jwtToken = localStorage.getItem("jwt");
+
+            if (!jwtToken) {
+                alert("JWT não encontrado no localStorage.");
+                return;
+            }
+
+            $.ajax({
+                url: `http://localhost:3333/api/v1/courses/${courseUuid}/subscribe`,
+                method: "PATCH",
+                headers: {
+                    "Authorization": `Bearer ${jwtToken}`
+                },
+                success: function (data) {
+                    alert("Inscrição realizada com sucesso!");
+                    window.location.reload();
+                },
+                error: function (xhr, status, error) {
+                    alert("Error ao inscrever no curso");
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+
+        function unsubscribe(courseUuid) {
+            const jwtToken = localStorage.getItem("jwt");
+
+            if (!jwtToken) {
+                alert("JWT não encontrado no localStorage.");
+                return;
+            }
+
+            $.ajax({
+                url: `http://localhost:3333/api/v1/courses/${courseUuid}/unsubscribe`,
+                method: "PATCH",
+                headers: {
+                    "Authorization": `Bearer ${jwtToken}`
+                },
+                success: function (data) {
+                    alert("Cancelamento realizado com sucesso!");
+                    window.location.reload();
+                },
+                error: function (xhr, status, error) {
+                    alert("Error ao cancelar curso");
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+
         // Chame a função quando a página for carregada
         $(document).ready(function () {
             fetchStudentInfo();
+            fetchCoursesInfo();
         });
 
         // Função para fazer logout
