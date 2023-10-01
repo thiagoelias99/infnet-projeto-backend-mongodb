@@ -60,7 +60,7 @@ server.listen(port, () => {
         log(`Access ${chalk.bold.blue("Administration Panel")} at ${chalk.blue(`http://localhost:${port}${admin.options.rootPath}`)}`);
         log(`Access ${chalk.bold.blue("Login Page")} at ${chalk.blue(`http://localhost:${port}/login`)}`);
         log(`\nDeveloped by ${chalk.bold.green("Thiago Elias")}`);
-        log("Repo https://github.com/thiagoelias99/infnet-projeto-backend-typescript\n\n\n");
+        log("Repo https://github.com/thiagoelias99/infnet-projeto-backend-mongodb\n\n\n");
     }, 2000);
 });
 
