@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "API Infnet Projeto Backend TypeScript",
-    "description": "Api desenvolvida para o curso Backend com TypeScript da InfNet",
+    "title": "API Infnet Projeto Backend TypeScript com Mongo DB",
+    "description": "Api desenvolvida para o curso Backend TypeScript com MongoDb da InfNet. A funcionalidade da API é gerenciar matrículas de estudante em determinados cursos. Os estudante podem realizar cadastro e inscrever nos cursos que estão em aberto. Os cursos somente podem ser gerenciados por um administrador. Implementado um painel de admin utilizando biblioteca 'adminJS' para gerenciamento dos cursos. Implementado um bloco de anotações em cada cursos, com comunicação em tempo real utilizando sockets. Utiliza banco de dados SQL (sqlite) para amarzenameto de dados de usuários e cursos. Utiliza banco de dados NoSQL (mongoDB) para armazenamento dos blocos de anotações.",
     "version": "0.0.1",
     "contact": {
       "name": "Thiago Elias",
@@ -12,7 +12,7 @@
   },
   "externalDocs": {
     "description": "Repositório do Projeto",
-    "url": "https://github.com/thiagoelias99/infnet-projeto-backend-typescript"
+    "url": "https://github.com/thiagoelias99/infnet-projeto-backend-mongodb"
   },
   "servers": [
     {

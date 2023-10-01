@@ -4,7 +4,6 @@ import morgan from "morgan";
 import * as dotenv from "dotenv";
 import router from "./routes";
 import { errorHandler } from "./middlewares";
-import bodyParser from "body-parser";
 import publicRouter from "./routes/public";
 import studentViewRouter from "./routes/studentsViewRouter";
 
@@ -20,15 +19,15 @@ const apiPrefix = `/api/${apiVersion}`;
 // CORS middleware configuration
 expressServer.use(cors());
 
-// Body Parser middleware configuration
-expressServer.use(bodyParser.urlencoded({ extended: false }));
-expressServer.use(bodyParser.json());
-
 // Log middleware configuration
 expressServer.use(morgan("dev"));
 
 //Admin Js
 expressServer.use(admin.options.rootPath, adminRouter);
+
+// Body Parser middleware configuration
+expressServer.use(express.urlencoded({ extended: false }));
+expressServer.use(express.json());
 
 // Routing configuration
 expressServer.use(publicRouter);

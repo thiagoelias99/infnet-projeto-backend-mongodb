@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informações do Estudante</title>
 
-    <!-- Adicione os links para os estilos do Bootstrap (CSS) e o JavaScript do Bootstrap (opcional) -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -35,25 +34,20 @@
         <button class="btn btn-danger" id="logout-button">Logout</button>
         <h1 class="text-center">Informações do Estudante</h1>
         <div id="student-info">
-            <!-- Os dados do estudante serão exibidos aqui -->
         </div>
         <h2 class="mt-4">Meus Cursos</h2>
         <div id="course-list">
-            <!-- Os cards dos cursos serão exibidos aqui -->
         </div>
         <h2 class="mt-4">Cursos Disponíveis</h2>
         <div id="available-course-list">
-            <!-- Os cards dos cursos serão exibidos aqui -->
         </div>        
     </div>
 
-    <!-- Adicione o link para o jQuery (necessário para o Bootstrap JavaScript) e o JavaScript do Bootstrap (opcional) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        // Função para fazer o GET com o token JWT no cabeçalho
         function fetchStudentInfo() {
             const jwtToken = localStorage.getItem("jwt");
 
@@ -69,7 +63,6 @@
                     "Authorization": `Bearer ${jwtToken}`
                 },
                 success: function (data) {
-                    // Preencha os dados do estudante na página
                     const studentInfo = `
                         <p><strong>UUID:</strong> ${data.uuid}</p>
                         <p><strong>Nome:</strong> ${data.name}</p>
@@ -78,7 +71,6 @@
                     `;
                     $("#student-info").html(studentInfo);
 
-                    // Preencha os cards dos cursos
                     const courseList = $("#course-list");
                     data.Courses.forEach(course => {
                         const courseCard = `
@@ -119,7 +111,6 @@
                 success: function (data) {
                     console.log(data)
 
-                    // Preencha os cards dos cursos
                     const availableCourseList = $("#available-course-list");
                     data.forEach(course => {
                         const courseCard = `
@@ -197,22 +188,17 @@
             });
         }
 
-        // Chame a função quando a página for carregada
         $(document).ready(function () {
             fetchStudentInfo();
             fetchCoursesInfo();
         });
 
-        // Função para fazer logout
         function logout() {
-            // Remove o JWT do localStorage
             localStorage.removeItem("jwt");
 
-            // Redireciona para a página de login
             window.location.href = "http://localhost:3333/login";
         }
 
-        // Vincule o evento de clique ao botão de logout
         $("#logout-button").click(function () {
             logout();
         });
